@@ -1,7 +1,7 @@
 //referencia
 const aplicacion = document.querySelector('.container')
 
-var albumName = document.getElementById("albumName").value
+//var albumName = document.getElementById("albumName").value
 
 //peticion
 //const url = 'https://theaudiodb.com/api/v1/json/1/discography.php?' + albumName

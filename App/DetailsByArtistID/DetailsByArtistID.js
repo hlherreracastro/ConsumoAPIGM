@@ -1,7 +1,7 @@
 //referencia
 const aplicacion = document.querySelector('.container')
 
-var idArtistName = document.getElementById("idArtistId").value
+//var idArtistName = document.getElementById("idArtistId").value
 
 //peticion
 //const url = 'https://theaudiodb.com/api/v1/json/1/artist.php?' + idArtistId

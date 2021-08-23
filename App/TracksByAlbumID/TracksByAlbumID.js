@@ -1,7 +1,7 @@
 //referencia
 const aplicacion = document.querySelector('.container')
 
-var idAlbum = document.getElementById("idAlbum").value
+//var idAlbum = document.getElementById("idAlbum").value
 
 
 //peticion

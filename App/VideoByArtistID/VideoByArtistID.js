@@ -1,7 +1,7 @@
 //referencia
 const aplicacion = document.querySelector('.container')
 
-var idVideo = document.getElementById("idVideo").value
+//var idVideo = document.getElementById("idVideo").value
 
 //peticion
 //const url = 'https://theaudiodb.com/api/v1/json/1/mvid.php?' + idVideo
@@ -9,7 +9,7 @@ var idVideo = document.getElementById("idVideo").value
 //peticion
 const url = 'https://theaudiodb.com/api/v1/json/1/mvid.php?i=112024'
 
-etch(url)
+fetch(url)
 //a estos .then se les llama promesas
 .then(respuesta => respuesta.json())//se captura todo el objeto json para poder recorrerlo
 .then(datos => {

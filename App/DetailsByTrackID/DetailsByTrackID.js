@@ -1,7 +1,7 @@
 //referencia
 const aplicacion = document.querySelector('.container')
 
-var idTrack = document.getElementById("idTrack").value
+//var idTrack = document.getElementById("idTrack").value
 
 //peticion
 //const url = 'https://theaudiodb.com/api/v1/json/1/track.php?' + idTrack
