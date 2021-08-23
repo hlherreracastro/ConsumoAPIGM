@@ -15,11 +15,12 @@ fetch(url)
 .then(datos => {
     //datos.album da acceso al array que contiene los elementos o el contenido del archivo json
     datos.mvids.forEach(video => { //tituloAlbum es la variable que recorrera cada uno de los elementos del array
-        console.log(video.strMusicVid, video.strTrack)//se captura el strAlbum que es un dato del array(en este caso el titulo) del json
+        console.log(video.strMusicVid, video.strTrack, video.strTrackThumb)//se captura el strAlbum que es un dato del array(en este caso el titulo) del json
         //estas lineas muestran los datos al usuario en pantalla
         const p = document.createElement('p')
         p.innerHTML = video.strTrack
         p.innerHTML = video.strMusicVid
+        p.innerHTML = video.strTrackThumb
         aplicacion.appendChild(p)
     });
     //console.log(data.album)
