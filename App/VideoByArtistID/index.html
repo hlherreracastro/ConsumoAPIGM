@@ -56,11 +56,56 @@
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <input class="btn btn-primary" type="submit" value="Search" onclick="return buscar(this)">
+                <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="return buscar(this)">Search</button>-->
             </form>
         </div>
     </nav>
     <div class="container">
+        <p>
+
+            <h1>VIDEOS DISPONIBLES</h1>
+            <table>
+                <tr>
+                    <td>
+               
+                <table id="cabecera">
+                     
+                        <thead>
+                            <tr> 
+                            <th></th>
+                            <th>Titulo</th>
+                            <!--<th>Año</th>
+                            <th>Tipo</th>-->
+                            <th  id="imagen">Imagen</th>
+                            </tr>
+                        </thead>
+                    <tbody id="informacion">                        
+                
+                    </tbody>                  
+                    
+                </table>
+                   
+                    </td>
+                </tr>
+            <tr>
+                <td>
+    
+                    <div  id="detalles"></div>
+                   
+                </td>
+             
+    
+            </tr>
+            <tr>
+                <td>
+    
+                    <div  id="imagenes"></div>
+                </td>
+          
+            </tr>
+            </table>    
+           </p> 
     </div>
 
     <script src="VideoByArtistID.js"></script>
