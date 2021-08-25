@@ -31,7 +31,7 @@ $form.addEventListener("submit", async e =>{
             <h2>${artist.strArtist}</h2>
             <img src="${artist.strArtistThumb}" alt="${artist.strArtist}">
             <p> ${artist.strBiographyEN} </p>
-            <a href="${artist.strTwitter}">Twitter</a>
+            <a href="${artist.strLastFMChart}" target="_blank">Last FM Chart</a>
             `;
         }
 
