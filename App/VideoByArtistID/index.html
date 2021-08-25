@@ -8,14 +8,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <style>
-        .grid-fluid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        html{
+            font-family: sans-serif;
+        }
+
+        img{
+            max-width: 100%;
+            height: auto;
+        }
+
+        main{
+            display: flex;
+            flex-direction: column; 
         }
     
         .loader {
-          display: block;
+          display: none;
           margin: auto;
+        }
+
+        main > * {
+            padding: 1rem;
+            flex-basis: 100%;
         }
       </style>
 
@@ -66,76 +80,21 @@
                     <a class="nav-link" href="/App/DetailsByTrackID/index.html">Details Tracks<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="form-inline my-2 my-lg-0" id="song-search">
+                <input class="form-control mr-sm-2" type="text" name="artist" placeholder="Search..." aria-label="Search" required>
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
     </nav>
     <div>
         <h1>Search Video by Artist ID</h1>
-        <input type="search" id="search" placeholder="Buscar videos..." autocomplete="off">
-        <section id="videos" class="grid-fluid"></section>
-        <template id="video-template">
-            <article class="show">
-            <h3></h3>
-            <div></div>
-            <img>
-            <a></a>
-            </article>
-        </template>
-        <script>
-            const d = document,
-            $videos = d.getElementById("videos"),
-            $template = d.getElementById("video-template").content,
-            $fragment = d.createDocumentFragment();
+        <img class="loader" src="../assets/loader.svg" alt="Loading...">
+        <aside class="error"></aside>
+        <main>
+            <article class="artist"></article>
+        </main>
 
-            d.addEventListener("keypress", async e =>{
-                if(e.target.matches("#search")){
-                    //console.log(e.key, e.keyCode);
-                    if(e.key == "Enter"){
-                        try{
-                            $videos.innerHTML = `<img class=loader src="../assets/loader.svg" alt="Cargando">`;
-
-                            let query = e.target.value.toLowerCase(),
-                            api = `https://theaudiodb.com/api/v1/json/1/mvid.php?i=${query}`,
-                            res = await fetch(api); //espera la respuesta del api
-                            json = await res.json(); //la respuesta se convierte a formato json
-
-                            console.log(api,res,json);
-
-                            if(!res.ok)throw{status:res.status, statusText:res.statusText};
-
-                            if(json.length === 0){
-                                $videos.innerHTML = `<h2>No existen resultados de videos para el criterio de la búsqueda<mark>${query}</mark></h2`
-                            }else {
-                                json.forEach(element => {
-                                    $template.querySelector("h3").textContent = element.video.strTrack;
-                                    $template.querySelector("div").innerHTML = element.video.summary ? element.video.summary: "Sin descripción";
-                                    $template.querySelector("img").src = element.video.strTrackThumb ? element.video.strTrackThumb.medium : "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-no-image-available-icon-flat.jpg";
-                                    $template.querySelector("img").alt = element.video.strTrack;
-                                    $template.querySelector("img").style.maxWidth = "100%";
-                                    $template.querySelector("a").href = element.video.imdbID ? element.video.imdbID: "#";
-                                    $template.querySelector("a").target = element.video.imdbID ? "_blank":"_self";
-                                    $template.querySelector("a").textContent = element.video.imdbID ? "ver video...":"";
-
-                                    let $clone = d.importNode($template,true);
-                                    $fragment.appendChild($clone);
-                                });
-                                
-                                $videos.innerHTML = "";
-                                $videos.appendChild($fragment);
-                            }
-                        }catch(err){
-                            console.log(err);
-                            let message = err.statusText || "Ocurrió un error";
-                            $videos.innerHTML = `<p>Error ${err.status}: ${message}</p>`;
-                        }
-                    }
-                }
-            });
-
-        </script> 
+        <script src="VideoByArtistID.js"></script> 
     </div>
 
     
