@@ -23,14 +23,14 @@ try{
     console.log(artistData);
 
     if(artistData.mvids === null){
-        $artistTemplate = `<h2>No existe este ID Artist<mark>${artist}</mark></h2`
+        $artistTemplate = `<h2>No existe este video by Artist ID<mark>${artist}</mark></h2`
     }
     else{
         let artist = artistData.mvids[7];
         $artistTemplate = `
         <h2>${artist.strTrack}</h2>
         <img src="${artist.strTrackThumb}" alt="${artist.strTrack}">
-        <a href="${artist.strMusicVid}" target="_blank">Link al Video</a>
+        <a href="${artist.strMusicVid}" target="_blank">Link al Video>>></a>
         `;
     }
 

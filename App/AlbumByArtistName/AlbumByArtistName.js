@@ -1,27 +1,45 @@
-//referencia
-const aplicacion = document.querySelector('.container')
+const d = document,
+$form = d.getElementById("song-search"),
+$loader = d.querySelector(".loader"),
+$error = d.querySelector(".error"),
+$main = d.querySelector("main"),
+$artist = d.querySelector(".artist");
 
-//var albumName = document.getElementById("albumName").value
 
-//peticion
-//const url = 'https://theaudiodb.com/api/v1/json/1/discography.php?' + albumName
+$form.addEventListener("submit", async e =>{
+    e.preventDefault();
 
-//peticion
-const url = 'https://theaudiodb.com/api/v1/json/1/discography.php?s=coldplay'
+    try{
+        $loader.style.display = "block";
 
-fetch(url)
-//a estos .then se les llama promesas
-.then(respuesta => respuesta.json())//se captura todo el objeto json para poder recorrerlo
-.then(datos => {
-    //datos.album da acceso al array que contiene los elementos o el contenido del archivo json
-    datos.album.forEach(albumDetails => { //albumDetails es la variable que recorrera cada uno de los elementos del array
-        console.log,(albumDetails.strAlbum,albumDetails.intYearReleased)//se captura el strDetail que es un dato del array(en este caso el titulo) del json
-        //estas lineas muestran los datos al usuario en pantalla
-        const p = document.createElement('p')
-        p.innerHTML = albumDetails.strAlbum+  albumDetails.intYearReleased
-        aplicacion.appendChild(p)
-    });
-    //console.log(data.album)
-})
-//si alguna de las promesas falla capturamos el error
-.catch(err => console.log(err))
+        let artist = e.target.artist.value.toLowerCase(), 
+        $artistTemplate = "", 
+        artistAPI=`https://theaudiodb.com/api/v1/json/1/discography.php?s=${artist}`, 
+        artistFetch = fetch(artistAPI),
+        [artistRes] = await Promise.all([artistFetch]),
+        artistData = await artistRes.json();
+
+        //console.log(artistRes);
+        console.log(artistData);
+
+        if(artistData.album === null){
+            $artistTemplate = `<h2>No existe este album by Artist Name<mark>${artist}</mark></h2`
+        }
+        else{
+            let artist = artistData.album[0];
+            $artistTemplate = `
+            <h2>${artist.strAlbum}</h2>
+            <p> Publication Year: ${artist.intYearReleased}</p>
+            `;
+        }
+
+        $loader.style.display = "none";
+        $artist.innerHTML = $artistTemplate;
+
+    }catch(err){
+        console.log(err);
+        let message = err.statusText || "Ocurrio un error";
+        $error.innerHTML = `<p>Error ${err.status}: ${message}</p>`;
+        $loader.style.display = "none";
+    }
+});

@@ -1,30 +1,47 @@
-//referencia
-const aplicacion = document.querySelector('.container')
+const d = document,
+$form = d.getElementById("song-search"),
+$loader = d.querySelector(".loader"),
+$error = d.querySelector(".error"),
+$main = d.querySelector("main"),
+$artist = d.querySelector(".artist");
 
-//var idAlbum = document.getElementById("idAlbum").value
 
+$form.addEventListener("submit", async e =>{
+    e.preventDefault();
 
-//peticion
-//const url = 'https://theaudiodb.com/api/v1/json/1/track.php?' + idAlbum
+    try{
+        $loader.style.display = "block";
 
-//peticion
-const url = 'https://theaudiodb.com/api/v1/json/1/track.php?m=2115888'
+        let artist = e.target.artist.value.toLowerCase(), 
+        $artistTemplate = "", 
+        artistAPI=`https://theaudiodb.com/api/v1/json/1/track.php?m=${artist}`, 
+        artistFetch = fetch(artistAPI),
+        [artistRes] = await Promise.all([artistFetch]),
+        artistData = await artistRes.json();
 
-fetch(url)
-//a estos .then se les llama promesas
-.then(respuesta => respuesta.json())//se captura todo el objeto json para poder recorrerlo
-.then(datos => {
-    //datos.album da acceso al array que contiene los elementos o el contenido del archivo json
-    datos.track.forEach(track => { //track es la variable que recorrera cada uno de los elementos del array
-        console.log(track.strTrack, track.strAlbum, track.strArtist, track.intTrackNumber)//se captura el strTrack que es un dato del array(en este caso el titulo) del json
-        //estas lineas muestran los datos al usuario en pantalla
-        const p = document.createElement('p')
-        p.innerHTML = "<h2 class='font-weight-light'>" + track.strArtist+", "+
-        track.strAlbum + "</h2>"+"<h3>"+track.intTrackNumber+": "+ track.strTrack+"</h3>"+"<h3>"+
-        "<div class='row gx-4 gx-lg-5 align-items-center my-5'> </div>"
-        aplicacion.appendChild(p)
-    });
-    //console.log(data.album)
-})
-//si alguna de las promesas falla capturamos el error
-.catch(err => console.log(err))
+        //console.log(artistRes);
+        console.log(artistData);
+
+        if(artistData.track === null){
+            $artistTemplate = `<h2>No existe este ID Artist<mark>${artist}</mark></h2`
+        }
+        else{
+            let artist = artistData.track[0];
+            $artistTemplate = `
+            <h2>${artist.strArtist}</h2>
+            <h3>Album: ${artist.strAlbum}</h3>
+            <h3>Track: ${artist.strTrack}</h3>
+            <p>Track Number: ${artist.intTrackNumber} </p>
+            `;
+        }
+
+        $loader.style.display = "none";
+        $artist.innerHTML = $artistTemplate;
+
+    }catch(err){
+        console.log(err);
+        let message = err.statusText || "Ocurrio un error";
+        $error.innerHTML = `<p>Error ${err.status}: ${message}</p>`;
+        $loader.style.display = "none";
+    }
+});

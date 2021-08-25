@@ -32,7 +32,7 @@ $form.addEventListener("submit", async e =>{
             <h3> Country: ${artist.strCountry}</h3>
             <img src="${artist.strArtistThumb}" alt="${artist.strArtist}">
             <p> ${artist.strBiographyES} </p>
-            <a href="${artist.strWebsite}" target="_blank">Website</a>
+            <p> Musical Genre: ${artist.strGenre} </p>
             
             `;
         }
