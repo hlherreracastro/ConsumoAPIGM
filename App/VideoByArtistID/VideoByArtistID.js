@@ -1,52 +1,6 @@
 //referencia
 //const aplicacion = document.querySelector('.container')
 
-function buscar(idVideo)
-{   
-    var idVideo=document.getElementById("idVideo").value;
-    var detalles="";
-
-    if(idVideo==""){
-       
-        detalles ="<tr>" +
-        "<td  > Sin informacion </td>"+
-        "</tr>";
-        document.getElementById("informacion").innerHTML = detalles;
-        
-    }else  {
-       
-        if(window.XMLHttpRequest){
-            xmlhttp=new XMLHttpRequest();                   
-        } else{
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");        
-        } 
-            xmlhttp.onreadystatechange=function() {
-            if(this.readyState ==4 && this.status ==200){
-            var data= JSON.parse(this.responseText);
-                data.Search.forEach(video => {
-                    detalles += "<tr>"+
-                    
-                               "<td><a href='"+ movie.imdbID+"'>Link al video</td>"+
-                               "<td>"+ video.strTrack+"</td>"+
-                               //"<td>"+ video.strTrackThumb+"</td>"+
-                               "<td><img src="+ video.strTrackThumb+"></td>"+
-                               "</tr>";
-                               
-                              
-                                                    
-                });
-              
-                document.getElementById("informacion").innerHTML=detalles;
-               
-                }
-                
-            };           
-            xmlhttp.open("POST","https://theaudiodb.com/api/v1/json/1/mvid.php?i=" + idVideo, true);
-       
-            xmlhttp.send();
-        }
-}
-
 //var idVideo = document.getElementById("idVideo").value
 
 //peticion
