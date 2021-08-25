@@ -18,9 +18,10 @@ fetch(url)
         console.log(details.strArtist,details.strGenre, details.strBiographyEN)//se captura el detalle que es un dato del array(en este caso el titulo) del json
         //estas lineas muestran los datos al usuario en pantalla
         const p = document.createElement('p')
-        p.innerHTML = details.strArtist
-        p.innerHTML = details.strGenre
-        p.innerHTML = details.strBiographyEN
+        p.innerHTML = "<h2 class='font-weight-light'>" + details.strArtist + "</h2>"+"<h3>"+"Genre: "+ details.strGenre+"</h3>"+ details.strBiographyEN
+        
+        // p.innerHTML = details.strGenre
+        // p.innerHTML = details.strBiographyEN
         aplicacion.appendChild(p)
     });
     //console.log(data.album)

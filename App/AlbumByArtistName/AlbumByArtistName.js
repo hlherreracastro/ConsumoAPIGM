@@ -18,8 +18,7 @@ fetch(url)
         console.log,(albumDetails.strAlbum,albumDetails.intYearReleased)//se captura el strDetail que es un dato del array(en este caso el titulo) del json
         //estas lineas muestran los datos al usuario en pantalla
         const p = document.createElement('p')
-        p.innerHTML = albumDetails.strAlbum
-        p.innerHTML = albumDetails.intYearReleased
+        p.innerHTML = albumDetails.strAlbum+  albumDetails.intYearReleased
         aplicacion.appendChild(p)
     });
     //console.log(data.album)

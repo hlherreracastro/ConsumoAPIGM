@@ -18,9 +18,14 @@
         console.log(video.strMusicVid, video.strTrack, video.strTrackThumb)//se captura el strAlbum que es un dato del array(en este caso el titulo) del json
         //estas lineas muestran los datos al usuario en pantalla
         const p = document.createElement('p')
-        p.innerHTML = video.strTrack
-        p.innerHTML = video.strMusicVid
-        p.innerHTML = video.strTrackThumb
+        p.innerHTML = "<div class='row gx-4 gx-lg-5 align-items-center my-5'>"+
+        "<div class='col-lg-5'>"+"<img class='img-fluid rounded mb-4 mb-lg-0' src=" + video.strTrackThumb +">"+"</div>"+
+        "<div class='col-lg-7'>"+
+            "<h1 class='font-weight-light'>" +video.strTrack+ "</h1>"+
+            "<a class='btn btn-primary' href="+ video.strMusicVid +">Go to Video!</a>"+
+        "</div>"+
+    "</div>"
+    
         aplicacion.appendChild(p)
     });
     //console.log(data.album)
