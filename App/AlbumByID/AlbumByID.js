@@ -1,10 +1,10 @@
 //referencia
 const aplicacion = document.querySelector('.container')
 
-//var idAlbum = document.getElementById("idAlbum").value
+// var idAlbum = document.getElementById("idAlbum").value
 
-//peticion
-//const url = 'https://theaudiodb.com/api/v1/json/1/album.php?' + idAlbum
+// peticion
+// const url = 'https://theaudiodb.com/api/v1/json/1/album.php?' + idAlbum
 
 //peticion
 const url = 'https://theaudiodb.com/api/v1/json/1/album.php?m=2115888'
